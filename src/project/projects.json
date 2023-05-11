@@ -1,0 +1,41 @@
+[
+  {
+    "title": "Mezcal",
+    "githubURI": "https://github.com/winnie-phebus/4550_project_team7",
+    "deployedURI": "",
+    "status": "Functional",
+    "types": ["Web", "School/ Academic", "Development", "Capstone"],
+    "skills": [
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "Node.js",
+      "Express",
+      "Heroku",
+      "Deployment",
+      "Figma",
+      "React",
+      "Git",
+      "RestfulAPI",
+      "GitHub"
+    ],
+    "description": "A website for finding and using various cocktail recipes that are pulled from the CocktailAPI. Users can search for cocktails by name, ingredient, or category. They can also save their favorite cocktails to their profile."
+  },
+  {
+    "title": "Abstrakt",
+    "githubURI": "https://github.com/winnie-phebus/NU_MAD_SM2022_Final_Project_06",
+    "deployedURI": "",
+    "status": "Functional",
+    "types": ["Mobile", "Academic", "Development", "Capstone"],
+    "skills": [
+      "Java",
+      "Android: Java",
+      "Android Studio",
+      "Figma",
+      "Firebase",
+      "Git",
+      "GitHub"
+    ],
+    "description": "An Android Application that allows users to save personal notes that have 'abstracts' written by users."
+  }
+]
