@@ -2,10 +2,6 @@ import React from "@heroicons/react";
 import { Link } from "react-router-dom";
 
 export default function Header() {
-  const onClick = () => {
-    console.log("clicked");
-  };
-
   return (
     <div class="container-fluid mx-auto flex flex-row items-center justify-between space-x-5  bg-slate-500 p-5">
       <span class="basis-1/2 self-stretch bg-slate-300/25 p-4 font-semibold tracking-wider text-red-300 hover:italic">

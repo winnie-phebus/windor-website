@@ -4,6 +4,8 @@
     "githubURI": "https://github.com/winnie-phebus/4550_project_team7",
     "deployedURI": "",
     "status": "Functional",
+    "type": "Project",
+    "dates": "2023",
     "types": ["Web", "School/ Academic", "Development", "Capstone"],
     "skills": [
       "HTML",
@@ -26,6 +28,8 @@
     "githubURI": "https://github.com/winnie-phebus/NU_MAD_SM2022_Final_Project_06",
     "deployedURI": "",
     "status": "Functional",
+    "type": "Project",
+    "dates": "2022",
     "types": ["Mobile", "Academic", "Development", "Capstone"],
     "skills": [
       "Java",
