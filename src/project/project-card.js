@@ -16,8 +16,8 @@ export default function ProjectCard({
   },
 }) {
   return (
-    <div class="mx-auto my-2 w-5/6 bg-slate-300 p-2 hover:rounded-se-3xl">
-      <div class="hover:bg-slate-700">
+    <div class="group/card mx-auto my-2 w-5/6 overflow-clip bg-slate-300 p-3 hover:rounded-se-3xl">
+      <div class="group-hover/card:text-white -mx-3 p-2 group-hover/card:bg-slate-700">
         <div class="flex justify-between items-center space-x-4">
           <h1 class="text-lg font-bold uppercase tracking-widest">
             {project.title}
