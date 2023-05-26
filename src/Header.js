@@ -12,7 +12,9 @@ export default function Header() {
           {" "}
           <Link to="/projects">Projects</Link>
         </button>
-        <button class="bg-red-900 p-1.5 text-red-100">Resume</button>
+        <button class="bg-red-900 p-1.5 text-red-100">
+          <Link to="/resources">Resources</Link>
+        </button>
       </div>
     </div>
   );

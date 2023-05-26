@@ -7,15 +7,17 @@ import Header from "./Header";
 import Footer from "./Footer";
 import Home from "./home";
 import Project from "./project";
+import Resources from "./resources";
 
 function App() {
   return (
-    <div className="App">
+    <div class="App">
       <BrowserRouter>
         <Header />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/projects" element={<Project />} />
+          <Route path="/resources" element={<Resources />} />
         </Routes>
         <Footer />
       </BrowserRouter>

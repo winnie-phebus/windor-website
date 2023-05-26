@@ -29,10 +29,14 @@ export default function ProjectCard({
           <h4 class="px-3">{project.status}</h4>
         </div>
       </div>
-      <p class="my-1">{project.description}</p>
+      <p class="my-1 line-clamp-1 group-hover/card:line-clamp-none group-hover/card:my-2">
+        {project.description}
+      </p>
       <div class="items-center my-2 flex space-x-2 divide-x-2">
         <div class="w-1.5/5 sm:w-auto">
-          <a class="hover:tracking-widest hover:text-red-400" href="#">
+          <a
+            class="hover:tracking-widest hover:text-red-400"
+            href={project.deployedURI}>
             {" "}
             [Deployed]{" "}
           </a>
