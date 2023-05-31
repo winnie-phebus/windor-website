@@ -9,7 +9,7 @@ export default function Home() {
       </button>
       <div
         dir="ltr"
-        class="container-fluid float-left mx-auto w-full bg-slate-100 p-5 text-black sm:w-5/6">
+        class="container-fluid float-left w-full p-4 text-black sm:w-5/6">
         <img
           class="float-left mb-1.5 me-3.5 inline-flex h-1/3 w-1/3 border-red-300 hover:me-5 hover:rounded-ss-3xl hover:border-4"
           src={avatar}

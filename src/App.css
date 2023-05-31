@@ -41,10 +41,6 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  background-color: #adc698;
-}
-
 .circle-border {
   border-radius: 100%;
 }

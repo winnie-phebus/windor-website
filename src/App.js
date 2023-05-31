@@ -8,6 +8,7 @@ import Footer from "./Footer";
 import Home from "./home";
 import Project from "./project";
 import Resources from "./resources";
+import Header from "./Header";
 
 {
   /* <div class="border-b-2 border-lime-500 p-2 pt-3 text-center md:border-0 md:text-left">
@@ -29,14 +30,19 @@ import Resources from "./resources";
 
 function App() {
   return (
-    <div class="App">
+    <div class="">
       <BrowserRouter>
-        <Navbar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/projects" element={<Project />} />
-          <Route path="/resources" element={<Resources />} />
-        </Routes>
+        <Header />
+        <div class="md:flex md:flex-row">
+          <Navbar />
+          <main class="w-auto bg-[#ffffff] p-1 text-center mb-3 md:mx-3 after:md:text-left">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/projects" element={<Project />} />
+              <Route path="/resources" element={<Resources />} />
+            </Routes>
+          </main>
+        </div>
         <Footer />
       </BrowserRouter>
     </div>
