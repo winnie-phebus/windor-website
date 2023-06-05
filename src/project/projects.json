@@ -41,5 +41,24 @@
       "GitHub"
     ],
     "description": "An Android Application that allows users to save personal notes that have 'abstracts' written by users."
+  },
+  {
+    "title": "Nameleon",
+    "githubURI": "https://github.com/winnie-phebus/NU_MAD_SM2022_Final_Project_06",
+    "deployedURI": "",
+    "status": "Incomplete",
+    "type": "Project",
+    "dates": "2020",
+    "types": ["Mobile", "Personal", "Development", "Generator"],
+    "skills": [
+      "API",
+      "Dart",
+      "Android Studio",
+      "Flutter",
+      "Firebase",
+      "Git",
+      "GitHub"
+    ],
+    "description": "A Flutter application that allows users to generate names for their children based on their preferences."
   }
 ]

@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import ProjectCard from "./project-card";
 import projects from "./projects.json";
+import Searchbar from "./search-bar";
 import { useSearchParams } from "react-router-dom";
 
 export default function Project() {
@@ -26,8 +27,9 @@ export default function Project() {
   }, [searchParams, projectsDisplay]);
 
   return (
-    <div>
-      <ul>
+    <div class="container-fluid p-2">
+      <Searchbar />
+      <ul class="grid auto-rows-auto auto-cols-auto">
         {projectsDisplay.map((project) => (
           <li>
             <ProjectCard project={project} />

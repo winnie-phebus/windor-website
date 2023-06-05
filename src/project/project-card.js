@@ -16,7 +16,7 @@ export default function ProjectCard({
   },
 }) {
   return (
-    <div class="group/card mx-auto my-2 w-5/6 overflow-clip bg-slate-300 p-3 md:w-3/6 hover:rounded-se-3xl">
+    <div class="group/card mx-auto my-2 w-5/6 overflow-clip bg-slate-300 p-3 md:w-auto hover:rounded-se-3xl">
       <div class="group-hover/card:text-white -mx-3 p-2 group-hover/card:bg-slate-700">
         <div class="flex justify-between items-center space-x-4">
           <h1 class="text-lg font-bold uppercase tracking-widest">
@@ -29,7 +29,7 @@ export default function ProjectCard({
           <h4 class="px-3">{project.status}</h4>
         </div>
       </div>
-      <p class="my-1 line-clamp-1 group-hover/card:line-clamp-none group-hover/card:my-2">
+      <p class="my-1 text-left line-clamp-1 group-hover/card:line-clamp-none group-hover/card:my-2">
         {project.description}
       </p>
       <div class="items-center my-2 flex space-x-2 divide-x-2">
