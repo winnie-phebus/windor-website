@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import ProjectCard from "./project-card";
-import Searchbar from "./search-bar";
 import { useSearchParams } from "react-router-dom";
 import { initProjects, selectProjects } from "../utils/reducers.js";
+import AdvancedSearchObject from "./search/advancedSSOF";
 
 export default function Project() {
   // const [projectsDisplay, setProjectsDisplay] = useState(projects);
@@ -32,7 +32,7 @@ export default function Project() {
 
   return (
     <div class="container-fluid p-2">
-      <Searchbar />
+      <AdvancedSearchObject />
       <ul class="grid grid-rows-3">
         {projects.map((project) => (
           <li>
