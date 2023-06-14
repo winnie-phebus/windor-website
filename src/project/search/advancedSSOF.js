@@ -1,6 +1,7 @@
 import React from "react";
 import Searchbar from ".";
 import Sort from "./sort";
+import Filter from "./filter";
 
 // flow of logic / priorites : Searchbar + Keyterm (all projects) -> Filter (sk projects) -> Sort (filtered projects) -> Display (sorted projects)
 // prev logic flow may be unnecessary due to state - I'll see how the UI works all together, but still following proposed model for now
@@ -15,7 +16,7 @@ export default function AdvancedSearchObject() {
       </div>
       <div class="collapse-content">
         <Sort />
-        <p>Filter placeholder</p>
+        <Filter />
       </div>
     </div>
   );

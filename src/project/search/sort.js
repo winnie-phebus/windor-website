@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { setProjects, selectProjects } from "../../utils/reducers.js";
 
+// resource: https://owlcation.com/stem/creating-a-sortable-list-in-react-js
+
 // source: https://bobbyhadz.com/blog/react-sort-array-of-objects
 function sortByString(aStr, bStr) {
   return aStr > bStr ? 1 : -1;
