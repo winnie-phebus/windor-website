@@ -57,12 +57,22 @@ export default function Sort() {
   const projects = useSelector(selectProjects);
   const updateProjects = useDispatch();
 
-  // pretty straight forward helper function
+  // pretty straight forward helper functions
   const radioOnClick = (value) => {
     setSortOrder(value);
+    console.log(`radioOnClick: ${sortOrder}`);
+  };
+
+  // TODO: fix radio buttons - right now, they don't change to checked even in the correct conditions
+  const checkedStatus = (value) => {
+    console.log(
+      `checkedStatus: ${sortOrder} === ${value}, ${sortOrder === value}`
+    );
+    return sortOrder === value;
   };
 
   useEffect(() => {
+    checkedStatus(sortOrder);
     if (sortOrder !== 0) {
       updateProjects(
         setProjects(sortItems(projects, sortFuncByPara(sortParam), sortOrder))
@@ -71,46 +81,49 @@ export default function Sort() {
     } else {
       updateProjects(setProjects(allProjects));
     }
+    checkedStatus(sortOrder);
   }, [sortOrder, sortParam]);
 
   return (
-    <div>
-      <p>
-        Sort placeholder: attempting to sort projects by "{sortParam}" in{" "}
-        {sortOrder} order
-      </p>
-      <div class="form-control">
-        <label class="label cursor-pointer">
+    <div class="flex flex-row items-center space-x-2">
+      <button class="" onClick={() => setSortOrder(0)}>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 20 20"
+          fill="currentColor"
+          class="w-5 h-5">
+          <path d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z" />
+        </svg>
+      </button>
+      <p>Sort projects by "{sortParam}" in </p>
+      <div class="form-control flex flex-row">
+        <label class="label cursor-pointer w-fit space-x-2">
           <input
             type="radio"
             name="radio-10"
             value={1}
-            class="radio checked:bg-red-500"
-            onClick={(e) => radioOnClick(e.target.value)}
+            checked={sortOrder === 1}
+            class="radio checked:bg-red-500 radio-sm"
+            onClick={(e) => {
+              radioOnClick(e.target.value);
+              checkedStatus(e.target.value);
+            }}
           />
           <span class="label-text">Ascending</span>
         </label>
-        <label class="label cursor-pointer">
-          <input
-            type="radio"
-            name="radio-10"
-            value={0}
-            class="radio checked:bg-purple-500"
-            onClick={(e) => radioOnClick(e.target.value)}
-          />
-          <span class="label-text">No Sort</span>
-        </label>
-        <label class="label cursor-pointer">
+        <label class="label cursor-pointer w-fit space-x-2">
           <input
             type="radio"
             name="radio-10"
             value={-1}
-            class="radio checked:bg-blue-500"
+            checked={sortOrder === -1}
+            class="radio checked:bg-blue-500 radio-sm"
             onClick={(e) => radioOnClick(e.target.value)}
           />
           <span class="label-text">Descending</span>
         </label>
       </div>
+      <p>= {sortOrder} order</p>
     </div>
   );
 }

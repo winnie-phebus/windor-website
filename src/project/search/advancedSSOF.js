@@ -14,7 +14,7 @@ export default function AdvancedSearchObject() {
       <div class="collapse-title text-xl font-medium">
         <Searchbar />
       </div>
-      <div class="collapse-content">
+      <div class="collapse-content divide-y-2 space-y-2">
         <Sort />
         <Filter />
       </div>
