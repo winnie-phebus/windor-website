@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { setProjects, selectProjects } from "../../utils/reducers.js";
+import {
+  setProjects,
+  selectProjects,
+  allProjects,
+} from "../../utils/reducers.js";
 
 // resource: https://owlcation.com/stem/creating-a-sortable-list-in-react-js
 
@@ -64,6 +68,8 @@ export default function Sort() {
         setProjects(sortItems(projects, sortFuncByPara(sortParam), sortOrder))
       );
       console.log(projects);
+    } else {
+      updateProjects(setProjects(allProjects));
     }
   }, [sortOrder, sortParam]);
 

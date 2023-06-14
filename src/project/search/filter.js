@@ -1,43 +1,107 @@
 import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  setProjects,
+  selectProjects,
+  allProjects,
+} from "../../utils/reducers.js";
 
 // TODO: add inclusion / exclusion variables? AND / OR?
+
+// for filters that return items from the given list with every filter selected
+function filterANDAllParams(items, filterParams) {
+  //   var lcItems = items.map((item) =>
+  //     item.skills.map((skill) => skill.toLowerCase())
+  //   );
+
+  //   console.log(`lcItems: ${lcItems}`);
+  return items.filter((item) => {
+    return filterParams.every((param) => {
+      console.log(`item: ${item}, param: ${param}`);
+      return item.skills
+        .map((skill) => skill.toLowerCase())
+        .includes(param.toLowerCase());
+    });
+  });
+}
+
+// for filters that return items from the given list with any filter selected
+function filterORAllParams(items, filterParams) {
+  return items.filter((item) => {
+    return filterParams.some((param) => {
+      return item.skills.includes(param);
+    });
+  });
+}
+
 export default function Filter() {
-  const filterListItems = ["git", "app", "api", "android studio"];
+  const filterListItems = ["git", "app", "API", "android studio"];
   const [filterParams, setFilterParams] = useState([]);
+  const projects = useSelector(selectProjects);
+  const updateProjects = useDispatch();
 
   useEffect(() => {
     console.log(`filterParams: ${filterParams}`);
+    if (filterParams.length === 0) {
+      updateProjects(setProjects(allProjects));
+    } else {
+      updateProjects(
+        setProjects(filterANDAllParams(allProjects, filterParams))
+      );
+    }
   }, [filterParams]);
+
+  const removeFilterParam = (checkValue) => {
+    setFilterParams(() => filterParams.filter((param) => param !== checkValue));
+  };
 
   const filterOnChange = (checkStatus, checkValue) => {
     if (checkStatus) {
       setFilterParams(() => [...filterParams, checkValue]);
     } else {
-      setFilterParams(() =>
-        filterParams.filter((param) => param !== checkValue)
-      );
+      removeFilterParam(checkValue);
     }
   };
 
   return (
-    <div class="flex flex-col">
-      <p>Filter placeholder!</p>
-      <div class="form-control flex">
+    <div class="flex flex-col space-y-1">
+      <div class="flex flex-row items-center">
+        <button class="" onClick={() => setFilterParams([])}>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+            class="w-5 h-5">
+            <path d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z" />
+          </svg>
+        </button>
+        <p class="mx-3 my-2">Show projects that include: </p>
+        <div class="flex flex-row">
+          {filterParams.map((param) => (
+            <p
+              class="bg-slate-400 text-sm p-1 m-1 content-center text-slate-50 rounded-md cursor-pointer"
+              onClick={() => removeFilterParam(param)}>
+              {param.toLowerCase()}
+            </p>
+          ))}
+        </div>
+      </div>
+      <div class="form-control flex flex-row">
         {filterListItems.map((item) => (
-          <label key={item} class="flex label cursor-pointer w-fit space-x-2">
+          <label
+            key={item}
+            class="flex label cursor-pointer w-fit text-sm -my-2 space-x-2">
             <input
               type="checkbox"
-              class="checkbox"
+              class="checkbox checkbox-sm"
               value={item}
+              checked={filterParams.includes(item)}
               onChange={(e) => {
                 filterOnChange(e.target.checked, e.target.value);
               }}
             />
-            <span class="label-text">{item.toUpperCase()}</span>
+            <span class="label-text text-xs">{item.toUpperCase()}</span>
           </label>
-        ))}
-        {filterParams.map((param) => (
-          <p>{param}</p>
         ))}
       </div>
     </div>
