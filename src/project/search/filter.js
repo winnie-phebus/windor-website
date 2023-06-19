@@ -5,6 +5,7 @@ import {
   selectProjects,
   allProjects,
 } from "../../utils/reducers.js";
+import { useSearchParams } from "react-router-dom";
 
 // TODO: add inclusion / exclusion variables? AND / OR?
 
@@ -35,29 +36,43 @@ function filterORAllParams(items, filterParams) {
 }
 
 export default function Filter() {
+  const qWord = "f";
   const filterListItems = ["git", "app", "API", "android studio"];
-  const [filterParams, setFilterParams] = useState([]);
+  const [searchParams, setFilterParams] = useSearchParams();
+  //   console.log(`searchParams: ${searchParams}`);
+  const filterParams = searchParams.get(qWord)?.split(",") || [];
+  //   console.log(`filterParams: ${filterParams.length}`);
   const projects = useSelector(selectProjects);
   const updateProjects = useDispatch();
 
   useEffect(() => {
     console.log(`filterParams: ${filterParams}`);
-    if (filterParams.length === 0) {
+    if (filterParams.length === 0 || searchParams.get(qWord) === null) {
       updateProjects(setProjects(allProjects));
     } else {
       updateProjects(
         setProjects(filterANDAllParams(allProjects, filterParams))
       );
     }
-  }, [filterParams]);
+  }, [searchParams]);
 
   const removeFilterParam = (checkValue) => {
-    setFilterParams(() => filterParams.filter((param) => param !== checkValue));
+    const newFilterParams = filterParams
+      .filter((param) => param !== checkValue)
+      .toString()
+      .toLowerCase();
+    newFilterParams
+      ? setFilterParams({
+          [qWord]: newFilterParams,
+        })
+      : setFilterParams({});
   };
 
   const filterOnChange = (checkStatus, checkValue) => {
     if (checkStatus) {
-      setFilterParams(() => [...filterParams, checkValue]);
+      setFilterParams({
+        [qWord]: [...filterParams, checkValue].toString().toLowerCase(),
+      });
     } else {
       removeFilterParam(checkValue);
     }
