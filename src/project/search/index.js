@@ -33,7 +33,7 @@ export default function Searchbar(keyword = "") {
 
   // TODO: properly implement the submit button / functionality. Consider abstracting form to a parent object when adding filter / sort
   return (
-    <form class="focus:outline-none ">
+    <form class="focus:outline-none w-full">
       <div class="relative text-slate-200 focus-within:text-gray-400 focus:border-transparent">
         <span class="absolute inset-y-0 left-0 flex items-center pl-1">
           <button type="submit" class="p-1 focus:outline-none" disabled>

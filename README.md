@@ -73,3 +73,4 @@ resources:
 
 - <https://v5.reactrouter.com/web/guides/quick-start>
 - <https://reactrouter.com/en/6.13.0>
+- <https://developer.mozilla.org/en-US/docs/Web/API/URL_API>
