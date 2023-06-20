@@ -6,6 +6,8 @@ import {
   allProjects,
 } from "../../utils/reducers.js";
 import { useSearchParams } from "react-router-dom";
+import Icon from "../../utils/components/icon.js";
+import { PATHS, ICONS } from "../../utils/constants.js";
 
 // resource: https://owlcation.com/stem/creating-a-sortable-list-in-react-js
 
@@ -53,8 +55,8 @@ function sortItems(
 // sortOrder is implemented as a multiplier, so 1 is ascending and -1 is descending, with 1 as the default
 // the '0' case is no sorting at all, ideally I would then skip calling this function all together, will test the 0 case anyway tho
 export default function Sort() {
-  const orderQueryLabel = "o"; // represents the order of the sort, currently 1, -1, or null (default)
-  const catQueryLabel = "cat"; // represent the category of what is sorted, will be either title or date for now
+  const orderQueryLabel = PATHS.SORT_ORDER_KEY; // represents the order of the sort, currently 1, -1, or null (default)
+  const catQueryLabel = PATHS.SORT_CAT_KEY; // represent the category of what is sorted, will be either title or date for now
 
   const [searchParams, setSearchParams] = useSearchParams();
   const [sortOrder, setSortOrder] = useState(searchParams.get(orderQueryLabel));
@@ -139,16 +141,7 @@ export default function Sort() {
 
   return (
     <div class="flex flex-row items-center space-x-2">
-      <button class="" onClick={() => resetSort()}>
-        {/* TODO: move to UTIL for Icons? */}
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 20 20"
-          fill="currentColor"
-          class="w-5 h-5">
-          <path d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z" />
-        </svg>
-      </button>
+      <Icon icon={ICONS.xmark} onClick={() => resetSort()}></Icon>
       <p>Sort projects by "{sortParam}" in </p>
       <div class="form-control flex flex-row">
         <label class="label cursor-pointer w-fit space-x-2">

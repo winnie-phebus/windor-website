@@ -7,6 +7,8 @@ import {
   initProjects,
   allProjects,
 } from "../../utils/reducers.js";
+import Icon from "../../utils/components/icon.js";
+import { ICONS } from "../../utils/constants.js";
 
 // TODO: come up with an alternative way to handle in place search/ filtering. This impl is not ideal
 function searchUsingKeyterm(keyword) {
@@ -51,17 +53,7 @@ export default function Searchbar() {
             onSubmit={() => {
               keyterm ? setSearchParams({ q: keyterm }) : setSearchParams({});
             }}>
-            {/* TODO: move to UTIL file for icons? */}
-            <svg
-              fill="none"
-              stroke="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              viewBox="0 0 24 24"
-              class="h-5 w-5">
-              <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-            </svg>
+            <Icon icon={ICONS.search} viewBox="0 0 24 24" />
           </button>
         </span>
         <input
@@ -73,14 +65,9 @@ export default function Searchbar() {
           onChange={(e) => onChange(e.target.value)}
         />
         <span class="absolute inset-y-0 right-0 flex items-center pr-2">
-          <button type="reset" class="">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 20 20"
-              fill="currentColor"
-              class="w-5 h-5">
-              <path d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z" />
-            </svg>
+          {/* TODO: actually implement reset - it needs to adjust query as well as reset the projects */}
+          <button type="reset" onClick={() => {}}>
+            <Icon icon={ICONS.xmark} />
           </button>
         </span>
       </div>
