@@ -69,6 +69,7 @@ export default function Filter() {
   };
 
   const filterOnChange = (checkStatus, checkValue) => {
+    console.log(`checkStatus: ${checkStatus}`);
     if (checkStatus) {
       setFilterParams({
         [qWord]: [...filterParams, checkValue].toString().toLowerCase(),
@@ -109,8 +110,8 @@ export default function Filter() {
             <input
               type="checkbox"
               class="checkbox checkbox-sm"
-              value={item}
-              checked={filterParams.includes(item)}
+              value={item.toLowerCase()}
+              checked={filterParams.includes(item.toLowerCase())}
               onChange={(e) => {
                 filterOnChange(e.target.checked, e.target.value);
               }}

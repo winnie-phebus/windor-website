@@ -5,6 +5,7 @@ import {
   selectProjects,
   allProjects,
 } from "../../utils/reducers.js";
+import { useSearchParams } from "react-router-dom";
 
 // resource: https://owlcation.com/stem/creating-a-sortable-list-in-react-js
 
@@ -52,41 +53,77 @@ function sortItems(
 // sortOrder is implemented as a multiplier, so 1 is ascending and -1 is descending, with 1 as the default
 // the '0' case is no sorting at all, ideally I would then skip calling this function all together, will test the 0 case anyway tho
 export default function Sort() {
-  const [sortOrder, setSortOrder] = useState(0);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [sortOrder, setSortOrder] = useState(searchParams.get("order"));
   const [sortParam, setSortParam] = useState("title");
   const projects = useSelector(selectProjects);
   const updateProjects = useDispatch();
 
+  // updates the url with the values of sortOrder changed by the radio buttons
+  function setSortedOrder(order) {
+    // const prevParams = { ...searchParams };
+    order
+      ? searchParams.has("order")
+        ? searchParams.set("order", order)
+        : searchParams?.append("order", order)
+      : searchParams?.delete("order");
+    // console.log(
+    //   `!! searchParams: ${searchParams?.toString()} || ${JSON.stringify({
+    //     // ...prevParams,
+    //     order: order,
+    //   })} !!`
+    // );
+    // order ?
+    setSearchParams(searchParams);
+    //   : setSearchParams({ ...searchParams });
+    // console.log(`searchParams: ${searchParams}`);
+  }
+
+  // updates the state value of sortOrder to match the url's params
+  useEffect(() => {
+    setSortOrder(searchParams.get("order"));
+  }, [searchParams]);
+
   // pretty straight forward helper functions
   const radioOnClick = (value) => {
-    setSortOrder(value);
+    setSortedOrder(value);
     console.log(`radioOnClick: ${sortOrder}`);
   };
 
-  // TODO: fix radio buttons - right now, they don't change to checked even in the correct conditions
+  // TODO: investigate why eqeqeq is not working here
   const checkedStatus = (value) => {
     console.log(
-      `checkedStatus: ${sortOrder} === ${value}, ${sortOrder === value}`
+      `!!checkedStatus: ${sortOrder} === ${value}, ${sortOrder === value}`
     );
     return sortOrder === value;
   };
 
+  //   useEffect(() => {}, [searchParams]);
+
   useEffect(() => {
+    // updates the respective radio buttons to be checked
     checkedStatus(sortOrder);
-    if (sortOrder !== 0) {
+
+    if (sortOrder) {
+      //   searchParams.has("order")
+      //     ? searchParams.set("order", sortOrder)
+      //     : searchParams?.append("order", sortOrder);
       updateProjects(
         setProjects(sortItems(projects, sortFuncByPara(sortParam), sortOrder))
       );
       console.log(projects);
     } else {
       updateProjects(setProjects(allProjects));
+      //   searchParams?.delete("order");
     }
-    checkedStatus(sortOrder);
+    // checkedStatus(sortOrder);
+    // setSearchParams(searchParams);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sortOrder, sortParam]);
 
   return (
     <div class="flex flex-row items-center space-x-2">
-      <button class="" onClick={() => setSortOrder(0)}>
+      <button class="" onClick={() => setSortedOrder()}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 20 20"
@@ -102,7 +139,8 @@ export default function Sort() {
             type="radio"
             name="radio-10"
             value={1}
-            checked={sortOrder === 1}
+            // eslint-disable-next-line eqeqeq
+            checked={sortOrder == 1}
             class="radio checked:bg-red-500 radio-sm"
             onClick={(e) => {
               radioOnClick(e.target.value);
@@ -116,7 +154,8 @@ export default function Sort() {
             type="radio"
             name="radio-10"
             value={-1}
-            checked={sortOrder === -1}
+            // eslint-disable-next-line eqeqeq
+            checked={sortOrder == -1}
             class="radio checked:bg-blue-500 radio-sm"
             onClick={(e) => radioOnClick(e.target.value)}
           />
