@@ -140,6 +140,7 @@ export default function Sort() {
   return (
     <div class="flex flex-row items-center space-x-2">
       <button class="" onClick={() => resetSort()}>
+        {/* TODO: move to UTIL for Icons? */}
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 20 20"

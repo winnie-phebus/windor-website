@@ -19,6 +19,7 @@ export default function AdvancedSearchObject() {
         <Searchbar />
         <button class="mx-1" onClick={() => toggleActive()}>
           {isActive ? (
+            // {/* TODO: move to UTIL for Icons? */}
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -33,6 +34,7 @@ export default function AdvancedSearchObject() {
               />
             </svg>
           ) : (
+            // {/* TODO: move to UTIL for Icons? */}
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -50,7 +52,7 @@ export default function AdvancedSearchObject() {
         </button>
       </div>
       {isActive && (
-        <div class="divide-y-2 space-y-2 bg-slate-300 m-1 p-1 rounded-md">
+        <div class="divide-y-2 space-y-2 bg-slate-100 m-1 p-1 rounded-md">
           <Sort />
           <Filter />
         </div>

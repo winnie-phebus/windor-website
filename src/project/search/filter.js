@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -83,6 +84,7 @@ export default function Filter() {
     <div class="flex flex-col space-y-1">
       <div class="flex flex-row items-center">
         <button class="" onClick={() => setFilterParams([])}>
+          {/* TODO: move to UTIL for Icons? */}
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 20 20"

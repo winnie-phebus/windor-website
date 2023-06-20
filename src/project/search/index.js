@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { useSearchParams } from "react-router-dom";
 import {
   setProjects,
   selectProjects,
@@ -7,36 +8,50 @@ import {
   allProjects,
 } from "../../utils/reducers.js";
 
+// TODO: come up with an alternative way to handle in place search/ filtering. This impl is not ideal
+function searchUsingKeyterm(keyword) {
+  return allProjects.filter((project) =>
+    project.title.toLowerCase().includes(keyword.toLowerCase())
+  );
+}
 // first going to 'hardcode' this searchbar to focus on searching through project TITLES
-export default function Searchbar(keyword = "") {
+export default function Searchbar() {
   //   console.log(`keyword: ${keyword}`);
   // keyword defaults to [object Object] for some reason?? Will investigate later if keyword is even needed
-  const [keyterm, setKeyterm] = useState("");
-  const projects = useSelector(selectProjects);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [keyterm, setKeyterm] = useState(searchParams.get("q") || "");
+  // const projects = useSelector(selectProjects);
   const updateProjects = useDispatch();
 
+  useEffect(() => {
+    keyterm
+      ? updateProjects(setProjects(searchUsingKeyterm(keyterm)))
+      : updateProjects(initProjects());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [keyterm]);
+
+  useEffect(() => {
+    setKeyterm(searchParams.get("q") || "");
+  }, [searchParams]);
+
+  // TODO: reconsider using this onChange function, as it is not needed for the search bar to work
   const onChange = (keyterm) => {
     setKeyterm(keyterm);
     console.log(`keyterm: ${keyterm}`);
-    if (keyterm !== "") {
-      //   console.log(projectInit);
-      var filterProjects = allProjects.filter((project) =>
-        project.title.toLowerCase().includes(keyterm.toLowerCase())
-      );
-      console.log(`keyterm: ${keyterm}, projects: ${filterProjects}`);
-      updateProjects(setProjects(filterProjects));
-    } else {
-      updateProjects(initProjects());
-      console.log(`keyterm: ${keyterm}, projects: ${projects}`);
-    }
   };
 
-  // TODO: properly implement the submit button / functionality. Consider abstracting form to a parent object when adding filter / sort
+  // TODO: Consider abstracting form to a parent object when adding filter / sort
   return (
     <form class="focus:outline-none w-full">
       <div class="relative text-slate-200 focus-within:text-gray-400 focus:border-transparent">
         <span class="absolute inset-y-0 left-0 flex items-center pl-1">
-          <button type="submit" class="p-1 focus:outline-none" disabled>
+          <button
+            type="submit"
+            class="p-1 focus:outline-none"
+            onSubmit={() => {
+              keyterm ? setSearchParams({ q: keyterm }) : setSearchParams({});
+            }}>
+            {/* TODO: move to UTIL file for icons? */}
             <svg
               fill="none"
               stroke="currentColor"
@@ -44,7 +59,7 @@ export default function Searchbar(keyword = "") {
               stroke-linejoin="round"
               stroke-width="2"
               viewBox="0 0 24 24"
-              class="h-6 w-6">
+              class="h-5 w-5">
               <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
             </svg>
           </button>
