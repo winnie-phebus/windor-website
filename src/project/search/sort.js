@@ -53,9 +53,12 @@ function sortItems(
 // sortOrder is implemented as a multiplier, so 1 is ascending and -1 is descending, with 1 as the default
 // the '0' case is no sorting at all, ideally I would then skip calling this function all together, will test the 0 case anyway tho
 export default function Sort() {
+  const orderQueryLabel = "o"; // represents the order of the sort, currently 1, -1, or null (default)
+  const catQueryLabel = "cat"; // represent the category of what is sorted, will be either title or date for now
+
   const [searchParams, setSearchParams] = useSearchParams();
-  const [sortOrder, setSortOrder] = useState(searchParams.get("order"));
-  const [sortParam, setSortParam] = useState("title");
+  const [sortOrder, setSortOrder] = useState(searchParams.get(orderQueryLabel));
+  const [sortParam, setSortParam] = useState(searchParams.get(catQueryLabel));
   const projects = useSelector(selectProjects);
   const updateProjects = useDispatch();
 
@@ -63,10 +66,10 @@ export default function Sort() {
   function setSortedOrder(order) {
     // const prevParams = { ...searchParams };
     order
-      ? searchParams.has("order")
-        ? searchParams.set("order", order)
-        : searchParams?.append("order", order)
-      : searchParams?.delete("order");
+      ? searchParams.has(orderQueryLabel)
+        ? searchParams.set(orderQueryLabel, order)
+        : searchParams?.append(orderQueryLabel, order)
+      : searchParams?.delete(orderQueryLabel);
     // console.log(
     //   `!! searchParams: ${searchParams?.toString()} || ${JSON.stringify({
     //     // ...prevParams,
@@ -79,10 +82,23 @@ export default function Sort() {
     // console.log(`searchParams: ${searchParams}`);
   }
 
+  // will continue further when the UI for selecting categories is implemented
+  // TODO: 'category' is still buggy - url does not match with parameter, fix reset logic after settling on UI
+  function setSortedParam(param) {
+    setSearchParams(searchParams.set(catQueryLabel, param));
+  }
+
   // updates the state value of sortOrder to match the url's params
   useEffect(() => {
-    setSortOrder(searchParams.get("order"));
+    setSortOrder(searchParams.get(orderQueryLabel));
+    setSortParam(searchParams.get(catQueryLabel));
   }, [searchParams]);
+
+  // resets the sortOrder to null, which will be interpreted as no sorting
+  function resetSort() {
+    setSortedOrder();
+    setSortParam("title");
+  }
 
   // pretty straight forward helper functions
   const radioOnClick = (value) => {
@@ -123,7 +139,7 @@ export default function Sort() {
 
   return (
     <div class="flex flex-row items-center space-x-2">
-      <button class="" onClick={() => setSortedOrder()}>
+      <button class="" onClick={() => resetSort()}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 20 20"
