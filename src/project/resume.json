@@ -1,0 +1,34 @@
+[
+  {
+    "title": "Mezcal",
+    "githubURI": "https://github.com/winnie-phebus/4550_project_team7",
+    "deployedURI": "",
+    "status": "Functional",
+    "type": "Project",
+    "dates": ["02/01/2023", "04/23/2023"],
+    "types": [
+      "Web",
+      "Academic",
+      "Capstone",
+      "API",
+      "Backend",
+      "Frontend",
+      "Fullstack"
+    ],
+    "skills": [
+      ["HTML", "Language"],
+      ["CSS", "Language"],
+      ["JavaScript", "Language"],
+      ["Node.js", "Language"],
+      ["Express", "Language"],
+      ["Heroku", "Database"],
+      ["Render", "Deployment"],
+      ["Figma", "Design"],
+      ["React", "Language"],
+      ["Git", "Version Control"],
+      ["RestfulAPI", "API"],
+      ["GitHub", "Version Control"]
+    ],
+    "description": "A website for finding and using various cocktail recipes that are pulled from the CocktailAPI. Users can search for cocktails by name, ingredient, or category. They can also save their favorite cocktails to their profile."
+  }
+]
