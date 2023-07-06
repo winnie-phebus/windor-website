@@ -15,7 +15,7 @@
       "Frontend",
       "Fullstack"
     ],
-    "skills": [
+    "tags": [
       ["HTML", "Language"],
       ["CSS", "Language"],
       ["JavaScript", "Language"],
@@ -29,6 +29,7 @@
       ["RestfulAPI", "API"],
       ["GitHub", "Version Control"]
     ],
+    "resources": [["CocktailAPI", "https://www.thecocktaildb.com/api.php"]],
     "description": "A website for finding and using various cocktail recipes that are pulled from the CocktailAPI. Users can search for cocktails by name, ingredient, or category. They can also save their favorite cocktails to their profile."
   }
 ]
